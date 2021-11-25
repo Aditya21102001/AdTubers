@@ -5,7 +5,7 @@ Problem Statement:
 Content creators are in search of people who could buy their talents and Event Organizers are in need of content creators who could put glitters of entertainment in their events, but both of the two community lack any type of link.
 
 Problem Solution:
-So, I have created a full stack website which can act as a link between the two. Content Creators can get events to perform and earn their livelihood while the people who are in dire need of such creators will easily get a platform to hire them. Thus, a bridge between the two will be established.
+So, I have developed a full stack website which can act as a link between the two. Content Creators can get events to perform and earn their livelihood while the people who are in dire need of such creators will easily get a platform to hire them. Thus, a bridge between the two will be established.
 
 Technologies Used:
 HTML
