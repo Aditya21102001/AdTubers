@@ -26,5 +26,18 @@ services:
       # Force HTTPS + secure cookies (Render terminates TLS at the proxy).
       - key: DJANGO_SECURE_SSL_REDIRECT
         value: "true"
+      # Seed idempotent demo content (sliders, team, youtubers) on startup.
+      # Flip to "false" once the data exists to skip it on future deploys.
+      - key: SEED_DEMO
+        value: "true"
+      # Demo superuser for /admin. Username/email are fixed; the password is
+      # generated strong (no weak admin/admin on a public URL) — reveal it in
+      # the dashboard's Environment tab, or replace it with your own value.
+      - key: DJANGO_SUPERUSER_USERNAME
+        value: "admin"
+      - key: DJANGO_SUPERUSER_EMAIL
+        value: "admin@example.com"
+      - key: DJANGO_SUPERUSER_PASSWORD
+        generateValue: true
       # RENDER_EXTERNAL_HOSTNAME is injected automatically and picked up in
       # settings.py for ALLOWED_HOSTS / CSRF_TRUSTED_ORIGINS.

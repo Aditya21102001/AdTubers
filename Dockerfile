@@ -29,11 +29,14 @@ RUN python manage.py collectstatic --noinput
 ENV PORT=8000
 EXPOSE 8000
 
-# Apply migrations, then serve with gunicorn.
+# Apply migrations, optionally seed demo data, then serve with gunicorn.
 # Shell form is intentional so ${PORT} / ${WEB_CONCURRENCY} expand at start.
 # WEB_CONCURRENCY defaults to 2 (safe for Render's 512 MB free tier); raise it
 # on a larger instance without touching this file.
+# seed_demo is idempotent and only runs when SEED_DEMO=true; `|| true` keeps a
+# seeding hiccup from blocking startup. Set SEED_DEMO=false once data exists.
 CMD python manage.py migrate --noinput && \
+    if [ "$SEED_DEMO" = "true" ]; then python manage.py seed_demo || true; fi && \
     exec gunicorn tubers.wsgi:application \
         --bind 0.0.0.0:${PORT} \
         --workers ${WEB_CONCURRENCY:-2} \
