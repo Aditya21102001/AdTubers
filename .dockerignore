@@ -21,7 +21,9 @@ ENV/
 
 # Build artifacts (regenerated inside the image)
 **/staticfiles/
-**/media/
+# NOTE: tubers/media/ holds committed demo images that MUST ship in the image
+# (served via urls.py in production), so it is intentionally NOT ignored.
+# Runtime uploads to that folder are ephemeral on Render's free tier.
 
 # Environment / secrets
 .env

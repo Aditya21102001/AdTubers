@@ -1,10 +1,18 @@
+/* ============================================================
+   Responsive breakpoints
+   Base layout lives in the other stylesheets + Bootstrap 4;
+   these rules adapt it down to tablet and phone widths.
+   ============================================================ */
+
+/* --- Tablet --- */
 @media only screen and (max-width: 995px) {
 	.grid {
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
 	}
 }
 
-@media only screen and (max-width: 750px) {
+/* --- Small tablet / large phone --- */
+@media only screen and (max-width: 768px) {
 	header .header-buttons {
 		justify-content: center !important;
 		align-items: center;
@@ -12,6 +20,7 @@
 	}
 	header .header-info {
 		text-align: center;
+		margin-bottom: 6px;
 	}
 
 	.banner img {
@@ -28,10 +37,52 @@
 	.tubers-page .tubers {
 		grid-template-columns: 1fr;
 	}
+
+	/* Two info buttons per row instead of a squeezed three. */
+	.person-description {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	/* The single-tuber page pins this section to 50% — go full width on phones. */
+	.single-page-tubers .w-50 {
+		width: 100% !important;
+	}
+
+	/* Smaller headings so captions don't overflow their banner. */
+	.banner h1 {
+		font-size: 1.8rem;
+	}
+	.home .top-banner .top-container {
+		top: 20%;
+		padding-left: 1.5rem !important;
+		padding-right: 1rem;
+	}
+	.home .top-banner .top-container h1 {
+		font-size: 1.6rem;
+	}
 }
 
-@media only screen and (max-width: 500px) {
+/* --- Phones --- */
+@media only screen and (max-width: 576px) {
 	.banner img {
-		height: 150px;
+		height: 170px;
+	}
+	.top-banner img {
+		height: 260px;
+	}
+
+	/* Stack the info buttons one per row on the smallest screens. */
+	.person-description {
+		grid-template-columns: 1fr;
+	}
+
+	.banner h1 {
+		font-size: 1.4rem;
+	}
+	.home .top-banner .top-container h1 {
+		font-size: 1.3rem;
+	}
+	.home .top-banner .top-container p {
+		font-size: 0.85rem;
 	}
 }

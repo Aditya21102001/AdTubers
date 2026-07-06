@@ -12,6 +12,7 @@
 .banner img {
 	height: 350px;
 	width: 100%;
+	object-fit: cover;
 }
 .banner h1 {
 	position: absolute;
@@ -22,7 +23,9 @@
 
 .grid {
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+	/* minmax(0, 1fr) lets tracks shrink below their content so cards never
+	   overflow the viewport on narrow screens. */
+	grid-template-columns: repeat(3, minmax(0, 1fr));
 	row-gap: 30px;
 	column-gap: 10px;
 }
@@ -42,6 +45,7 @@
 
 .person-description {
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
 	column-gap: 10px;
+	row-gap: 8px;
 }

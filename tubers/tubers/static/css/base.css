@@ -8,6 +8,8 @@
 body {
 	background-color: var(--primary);
 	color: #fff;
+	/* Safety net: never allow a stray fixed-width element to scroll the page. */
+	overflow-x: hidden;
 }
 
 a {
@@ -50,6 +52,10 @@ textarea {
 .card {
 	color: var(--secondary);
 	width: 18rem;
+	/* Shrink to fit narrow columns/phones instead of overflowing them. */
+	max-width: 100%;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 main {

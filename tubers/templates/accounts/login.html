@@ -19,7 +19,7 @@
         <div class="col-md-6 ">
             <img src="{% static 'assets/images/login-image.png' %}" class="img-fluid" alt="img">
         </div>
-        <form method="POST" action="{% url 'login' %}" class="col-md-5 offset-1">
+        <form method="POST" action="{% url 'login' %}" class="col-md-5 offset-md-1">
             {% csrf_token %}
             <div class="form-group">
                 <input name="username" class="form-control" placeholder="User Name">
