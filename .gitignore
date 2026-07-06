@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Django
+*.log
+db.sqlite3
+db.sqlite3-journal
+*.stale-bak
+
+# collectstatic output (regenerated with `manage.py collectstatic`)
+/tubers/static/
+/tubers/staticfiles/
+
+# Environment / secrets
+.env
+*.env
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

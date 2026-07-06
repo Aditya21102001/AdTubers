@@ -1,0 +1,30 @@
+# Render Blueprint — deploy AdTubers with one click.
+# In the Render dashboard: New > Blueprint, point it at this repo.
+# https://render.com/docs/blueprint-spec
+
+databases:
+  - name: adtubers-db
+    plan: free
+
+services:
+  - type: web
+    name: adtubers
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    envVars:
+      # Wire the managed Postgres connection string into DATABASE_URL.
+      - key: DATABASE_URL
+        fromDatabase:
+          name: adtubers-db
+          property: connectionString
+      # Generate a strong secret once and keep it stable across deploys.
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DJANGO_DEBUG
+        value: "false"
+      # Force HTTPS + secure cookies (Render terminates TLS at the proxy).
+      - key: DJANGO_SECURE_SSL_REDIRECT
+        value: "true"
+      # RENDER_EXTERNAL_HOSTNAME is injected automatically and picked up in
+      # settings.py for ALLOWED_HOSTS / CSRF_TRUSTED_ORIGINS.

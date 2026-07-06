@@ -3,7 +3,7 @@ from .models import Youtuber
 from  contactinfo.models import Contactinfo
 
 def youtubers(request):
-    contactinfo = Contactinfo.objects.latest('id')
+    contactinfo = Contactinfo.objects.last()
     tubers = Youtuber.objects.order_by('-created_date')
     city = Youtuber.objects.values_list('city', flat=True).distinct()
     camera_type = Youtuber.objects.values_list('camera_type', flat=True).distinct()
@@ -38,7 +38,7 @@ def youtubers(request):
     return render(request, 'youtubers/youtubers.html', data)
 
 def youtubers_detail(request, id):
-    contactinfo = Contactinfo.objects.latest('id')
+    contactinfo = Contactinfo.objects.last()
     tuber = get_object_or_404(Youtuber, pk=id)
     data={
         'contactinfo':contactinfo ,
@@ -49,7 +49,7 @@ def youtubers_detail(request, id):
 
 
 def search(request):
-    contactinfo = Contactinfo.objects.latest('id')
+    contactinfo = Contactinfo.objects.last()
     tubers = Youtuber.objects.order_by('-created_date')
     city = Youtuber.objects.values_list('city', flat=True).distinct()
     camera_type = Youtuber.objects.values_list('camera_type', flat=True).distinct()

@@ -4,14 +4,16 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-pillow = "*"
-django = "*"
-psycopg2 = "*"
-djangocms-admin-style = "*"
-django-ckeditor = "*"
-django-allauth = "*"
+django = "==5.2.15"
+pillow = "==12.3.0"
+django-allauth = {version = "==65.18.0", extras = ["socialaccount"]}
+django-ckeditor = "==6.7.3"
+djangocms-admin-style = "==3.3.1"
 
 [dev-packages]
 
+# Optional: uncomment to use PostgreSQL instead of the default SQLite.
+# psycopg = {version = "==3.2.9", extras = ["binary"]}
+
 [requires]
-python_version = "3.9"
+python_version = "3.13"

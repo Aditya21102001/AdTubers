@@ -1,0 +1,39 @@
+# Version control
+.git
+.gitignore
+
+# Python caches
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Local SQLite DB & logs — Render uses PostgreSQL via DATABASE_URL
+*.log
+**/db.sqlite3
+**/db.sqlite3-journal
+
+# Build artifacts (regenerated inside the image)
+**/staticfiles/
+**/media/
+
+# Environment / secrets
+.env
+*.env
+
+# IDE / OS cruft
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Not needed at runtime
+README.md
+Pipfile
+Pipfile.lock

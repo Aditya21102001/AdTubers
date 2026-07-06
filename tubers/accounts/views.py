@@ -22,7 +22,7 @@ def login(request):
             messages.warning(request, 'Incorrect Credentials')
             return redirect('login')
 
-    contactinfo = Contactinfo.objects.latest('id')
+    contactinfo = Contactinfo.objects.last()
     data = {
         'contactinfo' : contactinfo
     }    
@@ -58,7 +58,7 @@ def register(request):
         else:
             messages.warning(request, 'Password do not match')
             return redirect('register')
-    contactinfo = Contactinfo.objects.latest('id')
+    contactinfo = Contactinfo.objects.last()
     data = {
         'contactinfo' : contactinfo
     }
@@ -67,7 +67,7 @@ def register(request):
 @login_required(login_url='login')
 def dashboard(request):
     tubers = Youtuber.objects.order_by('-created_date')
-    contactinfo = Contactinfo.objects.latest('id')
+    contactinfo = Contactinfo.objects.last()
     data={
         'contactinfo':contactinfo,
         'tubers':tubers

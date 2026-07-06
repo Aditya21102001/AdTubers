@@ -11,7 +11,7 @@ def home(request):
     all_tubers=Youtuber.objects.order_by('-created_date')
     sliders = Slider.objects.all()
     teams = Team.objects.all()
-    contactinfo = Contactinfo.objects.latest('id')
+    contactinfo = Contactinfo.objects.last()
     data = {
         'contactinfo' : contactinfo,
         'sliders' : sliders, 
@@ -23,7 +23,7 @@ def home(request):
 
 def about(request):
     teams = Team.objects.all()
-    contactinfo = Contactinfo.objects.latest('id')
+    contactinfo = Contactinfo.objects.last()
     data = {
         'contactinfo' : contactinfo,
         'teams' : teams
@@ -33,7 +33,7 @@ def about(request):
 def services(request):
     tubers = Youtuber.objects.order_by('-created_date')
     sliders = Slider.objects.all()
-    contactinfo = Contactinfo.objects.latest('id')
+    contactinfo = Contactinfo.objects.last()
     data = {'sliders' :sliders,
         'contactinfo' : contactinfo,
         'tubers' : tubers
@@ -41,7 +41,7 @@ def services(request):
     return render(request, 'webpages/services.html',data)
 
 def contact(request):
-    contactinfo = Contactinfo.objects.latest('id')
+    contactinfo = Contactinfo.objects.last()
     data = {
         'contactinfo' : contactinfo
     }

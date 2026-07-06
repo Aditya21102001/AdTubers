@@ -1,8 +1,7 @@
-
 from django.db import models
-from datetime import datetime
+from django.utils import timezone
 
-# Create your models here.
+
 class Contactpage(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100, blank=True)
@@ -12,7 +11,7 @@ class Contactpage(models.Model):
     email = models.CharField(max_length=255)
     state = models.CharField(max_length=100, blank=True)
     message = models.TextField(blank=True)
-    created_date = models.DateTimeField(blank=True, default=datetime.now)
+    created_date = models.DateTimeField(blank=True, default=timezone.now)
 
-def __str__(self):
-   return self.email 
+    def __str__(self):
+        return self.email

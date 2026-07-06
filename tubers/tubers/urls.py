@@ -14,9 +14,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.conf.urls.static import static
 from django.conf import settings
+from django.views.static import serve
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,4 +28,19 @@ urlpatterns = [
     path('contactinfo/', include('contactinfo.urls')),
     path('accounts/', include('accounts.urls')),
     path('socialaccounts/', include('allauth.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+else:
+    # Serve the committed demo media in production too (single-process friendly).
+    # NOTE: uploads to the local filesystem are ephemeral on most hosts — for
+    # durable user uploads switch to object storage (S3 / Cloudflare R2) via
+    # django-storages.
+    urlpatterns += [
+        re_path(
+            r'^media/(?P<path>.*)$',
+            serve,
+            {'document_root': settings.MEDIA_ROOT},
+        ),
+    ]
