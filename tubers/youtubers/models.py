@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from ckeditor.fields import RichTextField
+from django_ckeditor_5.fields import CKEditor5Field
 
 
 class Youtuber(models.Model):
@@ -31,7 +31,7 @@ class Youtuber(models.Model):
     price = models.IntegerField()
     photo = models.ImageField(upload_to='ytubers/%Y/%m/')
     video_url = models.CharField(max_length=255)
-    description = RichTextField()
+    description = CKEditor5Field(config_name='default')
     city = models.CharField(max_length=255)
     age = models.IntegerField()
     height = models.IntegerField()

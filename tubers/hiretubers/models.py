@@ -3,6 +3,12 @@ from django.utils import timezone
 
 
 class Hiretuber(models.Model):
+    STATUS_CHOICES = (
+        ('pending', 'Pending'),
+        ('accepted', 'Accepted'),
+        ('declined', 'Declined'),
+    )
+
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     tuber_id = models.IntegerField()
@@ -13,6 +19,7 @@ class Hiretuber(models.Model):
     state = models.CharField(max_length=100)
     message = models.TextField(blank=True)
     user_id = models.IntegerField(blank=True)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
     created_date = models.DateTimeField(blank=True, default=timezone.now)
 
     def __str__(self):

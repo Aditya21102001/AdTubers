@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from ckeditor.fields import RichTextField
+from django_ckeditor_5.fields import CKEditor5Field
 
 
 class Contactinfo(models.Model):
@@ -10,8 +10,8 @@ class Contactinfo(models.Model):
     insta_handle = models.CharField(max_length=255)
     youtube_handle = models.CharField(max_length=255)
     twitter_handle = models.CharField(max_length=255)
-    description_1 = RichTextField(blank=True)
-    description_2 = RichTextField(blank=True)
+    description_1 = CKEditor5Field(config_name='default', blank=True)
+    description_2 = CKEditor5Field(config_name='default', blank=True)
     phone = models.CharField(max_length=100)
     email = models.CharField(max_length=255)
     created_date = models.DateTimeField(blank=True, default=timezone.now)

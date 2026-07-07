@@ -79,7 +79,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "ckeditor",
+    "django_ckeditor_5",
     "django.contrib.sites",
     "allauth",
     "allauth.account",
@@ -217,6 +217,18 @@ STORAGES = {
     },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+
+# CKEditor 5 — maintained, open-source (GPL) successor to the end-of-life
+# CKEditor 4 that django-ckeditor bundled. Used for admin rich-text descriptions.
+CKEDITOR_5_FILE_UPLOAD_PERMISSION = "staff"
+CKEDITOR_5_CONFIGS = {
+    "default": {
+        "toolbar": [
+            "heading", "|", "bold", "italic", "link",
+            "bulletedList", "numberedList", "blockQuote",
+        ],
     },
 }
 

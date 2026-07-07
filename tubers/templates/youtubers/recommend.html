@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<main class="tubers-page">
+    <div class="banner">
+        <img src="{% static 'assets/images/bg-banner.png' %}" alt="" class="img-fluid w-100">
+        <h1 class="text-center">AI Creator Match</h1>
+    </div>
+
+    <section class="container mt-5">
+        <p class="text-center">Describe your event and AdTuber will match the best YouTubers for it.</p>
+        <form method="GET" action="{% url 'recommend' %}" class="row justify-content-center">
+            <div class="col-md-9">
+                <div class="input-group mb-2">
+                    <input name="q" value="{{ query }}" class="form-control" autofocus
+                        placeholder="e.g. a funny gaming creator in Delhi for a product launch" required>
+                    <div class="input-group-append">
+                        <button class="btn btn-accent" type="submit">Find Creators</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <!-- Example briefs (click to run) -->
+        <div class="text-center mt-2">
+            <span class="text-white-50 mr-1">Try:</span>
+            <a href="?q=funny gaming creator in Delhi" class="badge bg-accent p-2 m-1">funny gaming creator</a>
+            <a href="?q=cooking recipe show" class="badge bg-accent p-2 m-1">cooking show</a>
+            <a href="?q=tech mobile review creator" class="badge bg-accent p-2 m-1">tech reviewer</a>
+            <a href="?q=comedy creator for a college fest" class="badge bg-accent p-2 m-1">comedy for a fest</a>
+            <a href="?q=coding programming tutorials" class="badge bg-accent p-2 m-1">coding channel</a>
+        </div>
+    </section>
+
+    {% if query %}
+    <section class="container mt-4 mb-5">
+        {% if results %}
+        <h4 class="text-center mb-4">Top matches for &ldquo;{{ query }}&rdquo;</h4>
+        <div class="grid">
+            {% for r in results %}
+            <div class="card border-0 text-center">
+                <div class="feature-text">
+                    <a href="{% url 'youtubers_detail' r.tuber.id %}">
+                        <img src="{{ r.tuber.photo.url }}" class="card-img-top" alt="{{ r.tuber.name }}"></a>
+                    <span class="text-left bg-accent font-weight-bold">{{ r.score }}% match</span>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ r.tuber.name }}</h5>
+                    <p class="card-text mb-2">{{ r.tuber.category }}</p>
+
+                    <div class="progress mb-2" style="height: 8px;">
+                        <div class="progress-bar bg-accent" role="progressbar"
+                            style="width: {{ r.score }}%;" aria-valuenow="{{ r.score }}"
+                            aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+
+                    {% if r.matched %}
+                    <p class="mb-2"><small class="text-white-50">matched:</small>
+                        {% for m in r.matched %}<span class="badge badge-light mr-1">{{ m }}</span>{% endfor %}
+                    </p>
+                    {% endif %}
+
+                    <div class="person-description mt-2">
+                        <button class="btn btn-accent"> City: {{ r.tuber.city }} </button>
+                        <button class="btn btn-accent"> Category: {{ r.tuber.category }} </button>
+                        <button class="btn btn-accent"> Subs: {{ r.tuber.subs_count }} </button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center mt-4">
+            <p class="text-white-50">
+                No close matches for &ldquo;{{ query }}&rdquo;. Try different keywords
+                (e.g. gaming, comedy, cooking, vlog, code, mobile review).
+            </p>
+        </div>
+        {% endif %}
+    </section>
+    {% endif %}
+</main>
+{% endblock content %}

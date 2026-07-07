@@ -16,6 +16,11 @@ a {
 	color: #fff;
 }
 
+.navbar-brand {
+	font-size: 1.6rem;
+	letter-spacing: 0.5px;
+}
+
 h2,
 h3 {
 	color: var(--accent);

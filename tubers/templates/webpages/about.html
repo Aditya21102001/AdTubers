@@ -10,26 +10,26 @@
         </h1>
     </div>
     <section class="container mt-5 mb-5">
-        <div class="row mt-5">
+        <div class="row mt-5 align-items-center">
             <div class="col-md-4">
-                <img src="https://placeimg.com/640/480/any" alt="" class="img-fluid">
+                <img src="{% static 'assets/images/bg-banner.png' %}" alt="AdTuber marketplace" class="img-fluid rounded">
             </div>
             <div class="col-md-8 animate__animated animate__fadeInRight">
-                <h2 class="text-center">About Project</h2>
+                <h2 class="text-center">About AdTuber</h2>
                 <p>
                     {{ contactinfo.description_1 | safe }}
                 </p>
             </div>
         </div>
-        <div class="row mt-5">
+        <div class="row mt-5 align-items-center">
 
             <div class="col-md-8  animate__animated animate__fadeInLeft  animate__delay-1s">
-                <h2 class="text-center">About Project</h2>
+                <h2 class="text-center">About the Developer</h2>
                 <p>{{ contactinfo.description_2 | safe }}
                 </p>
             </div>
             <div class="col-md-4">
-                <img src="https://placeimg.com/640/480/any" alt="" class="img-fluid">
+                <img src="{% static 'assets/images/login-image.png' %}" alt="Aditya Yadav" class="img-fluid rounded">
             </div>
         </div>
     </section>

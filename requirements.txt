@@ -5,7 +5,7 @@
 Django==5.2.15
 Pillow==12.3.0
 django-allauth[socialaccount]==65.18.0
-django-ckeditor==6.7.3
+django-ckeditor-5==0.2.20
 djangocms-admin-style==3.3.1
 
 # --- Production / deployment ---

@@ -7,7 +7,7 @@ name = "pypi"
 django = "==5.2.15"
 pillow = "==12.3.0"
 django-allauth = {version = "==65.18.0", extras = ["socialaccount"]}
-django-ckeditor = "==6.7.3"
+django-ckeditor-5 = "==0.2.20"
 djangocms-admin-style = "==3.3.1"
 
 [dev-packages]

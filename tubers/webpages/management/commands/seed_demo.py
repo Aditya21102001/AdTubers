@@ -43,22 +43,30 @@ class Command(BaseCommand):
             self.stdout.write(f"  superuser '{username}' already exists")
 
     def _create_contactinfo(self):
-        if Contactinfo.objects.exists():
-            self.stdout.write("  contactinfo already present")
-            return
-        Contactinfo.objects.create(
-            first_name="AdTubers",
-            last_name="Team",
-            fb_handle="https://facebook.com/adtubers",
-            insta_handle="https://instagram.com/adtubers",
-            youtube_handle="https://youtube.com/@adtubers",
-            twitter_handle="https://twitter.com/adtubers",
-            description_1="AdTubers connects content creators with event organizers.",
-            description_2="Find the perfect creator for your next event.",
-            phone="9876543210",
-            email="hello@adtubers.example.com",
+        # Singleton: update in place so a redeploy refreshes the personalized info.
+        info = Contactinfo.objects.first() or Contactinfo()
+        info.first_name = "Aditya"
+        info.last_name = "Yadav"
+        info.fb_handle = "https://github.com/Aditya21102001"
+        info.insta_handle = "https://www.linkedin.com/in/aditya-yadav-9b4a48192"
+        info.youtube_handle = "https://github.com/Aditya21102001"
+        info.twitter_handle = "https://www.linkedin.com/in/aditya-yadav-9b4a48192"
+        info.description_1 = (
+            "<p>AdTuber is a full-stack event marketplace that connects brands and "
+            "event organisers with the right YouTubers and content creators. Browse "
+            "creators, filter by city, camera and category, and send a hire request "
+            "in a few clicks.</p>"
         )
-        self.stdout.write("  created contactinfo")
+        info.description_2 = (
+            "<p>Built by <strong>Aditya Yadav</strong>, a full-stack &amp; "
+            "Generative-AI developer. AdTuber is an open-source Django project "
+            "(social login, responsive UI) deployed free of cost on Render. "
+            "Source: github.com/Aditya21102001/AdTubers</p>"
+        )
+        info.phone = ""  # professional-only: personal phone is not published
+        info.email = "adityakumaryadav21102001@gmail.com"
+        info.save()
+        self.stdout.write("  contactinfo set (Aditya Yadav, professional)")
 
     def _create_sliders(self):
         sliders = [

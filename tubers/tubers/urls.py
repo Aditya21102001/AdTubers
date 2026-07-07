@@ -28,6 +28,7 @@ urlpatterns = [
     path('contactinfo/', include('contactinfo.urls')),
     path('accounts/', include('accounts.urls')),
     path('socialaccounts/', include('allauth.urls')),
+    path('ckeditor5/', include('django_ckeditor_5.urls')),
 ]
 
 if settings.DEBUG:

@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
 from contactinfo.models import Contactinfo
-from youtubers.models import Youtuber
+from hiretubers.models import Hiretuber
 
 
 # Create your views here.
@@ -66,10 +66,10 @@ def register(request):
 
 @login_required(login_url='login')
 def dashboard(request):
-    tubers = Youtuber.objects.order_by('-created_date')
+    bookings = Hiretuber.objects.filter(user_id=request.user.id).order_by('-created_date')
     contactinfo = Contactinfo.objects.last()
-    data={
-        'contactinfo':contactinfo,
-        'tubers':tubers
+    data = {
+        'contactinfo': contactinfo,
+        'bookings': bookings,
     }
     return render(request, 'accounts/dashboard.html', data)

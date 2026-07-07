@@ -13,34 +13,44 @@
     <section class="container mt-5">
         <h2 class="text-center">Welcome to Dashboard</h2>
         <h4 class="text-center text-white-50">
-            hi, {{ user.first_name }}, Hope you are having a good day
+            hi, {{ user.first_name }}, here are your hire requests
         </h4>
 
-        <div class="table-responsive mt-3">
-
+        {% if bookings %}
+        <div class="table-responsive mt-4">
             <table class="table table-striped">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">YouTuber</th>
-                        <th scope="col">City</th>
-                        <th scope="col">Visit</th>
+                        <th scope="col">Requested</th>
+                        <th scope="col">Status</th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for tuber in tubers %}
+                    {% for b in bookings %}
                     <tr>
-                        <th scope="row">==></th>
-                        <td>{{ tuber.name }}</td>
-                        <td>{{ tuber.city }}</td>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ b.tuber_name }}</td>
+                        <td>{{ b.created_date|date:"d M Y" }}</td>
                         <td>
-                            <a href="{% url 'youtubers_detail' tuber.id %}"><div class="btn btn-accent">Go to Page </div></a>
+                            <span class="badge p-2 text-uppercase {% if b.status == 'accepted' %}badge-success{% elif b.status == 'declined' %}badge-danger{% else %}badge-warning{% endif %}">{{ b.get_status_display }}</span>
+                        </td>
+                        <td>
+                            <a href="{% url 'youtubers_detail' b.tuber_id %}"><div class="btn btn-accent btn-sm">View</div></a>
                         </td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
+        {% else %}
+        <div class="text-center mt-5">
+            <p class="text-white-50">You haven't sent any hire requests yet.</p>
+            <a href="{% url 'youtubers' %}" class="btn btn-accent">Browse YouTubers</a>
+        </div>
+        {% endif %}
 
     </section>
 </main>
