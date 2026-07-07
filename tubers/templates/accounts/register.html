@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
+{% comment %}
+Registration page. Rendered by accounts.views.register; the form POSTs to
+'register' with firstname/lastname/username/email/password/confirm_password.
+Optional social-signup buttons appear only when a provider is configured.
+{% endcomment %}
 {% block content %}
 
 {% load socialaccount %}

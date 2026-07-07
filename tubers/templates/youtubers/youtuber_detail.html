@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
+{% comment %}
+Single creator profile page. Rendered by youtubers.views.youtubers_detail.
+Context: tuber (the Youtuber). Includes the "hire this creator" form, which
+POSTs to the hiretubers app (url name 'hiretuber').
+{% endcomment %}
 
 
 {% block content %}

@@ -1,3 +1,5 @@
+"""App configuration for the ``contactinfo`` app."""
+
 from django.apps import AppConfig
 
 

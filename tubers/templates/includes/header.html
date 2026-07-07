@@ -1,4 +1,9 @@
 {% load static %}
+{% comment %}
+Top utility bar (above the navbar). Shows the site email/phone from the
+`contactinfo` context object, and swaps the auth buttons (Sign in / Sign up vs
+Dashboard / Logout) based on whether the visitor is logged in.
+{% endcomment %}
 <header class="header ">
     <div class="container">
       <div class="row ">

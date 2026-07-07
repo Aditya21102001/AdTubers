@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
+{% comment %}
+AI Creator Match page. Rendered by youtubers.views.recommend.
+Context: query (the user's free-text brief) and results (a list of
+{tuber, score, matched} dicts ranked by the TF-IDF recommender).
+{% endcomment %}
 
 {% block content %}
 <main class="tubers-page">

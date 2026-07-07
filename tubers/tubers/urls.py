@@ -1,17 +1,8 @@
-"""tubers URL Configuration
+"""Root URL configuration for the tubers project.
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+This is the top-level router: it wires the admin, third-party apps, and each of
+the six custom apps onto a URL prefix, then delegates to that app's own
+``urls.py``. See https://docs.djangoproject.com/en/5.2/topics/http/urls/.
 """
 from django.contrib import admin
 from django.urls import path, include, re_path
@@ -20,15 +11,15 @@ from django.conf import settings
 from django.views.static import serve
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('webpages.urls')),
-    path('youtubers/', include('youtubers.urls')),
-    path('hiretubers/', include('hiretubers.urls')),
-    path('contactpage/', include('contactpage.urls')),
-    path('contactinfo/', include('contactinfo.urls')),
-    path('accounts/', include('accounts.urls')),
-    path('socialaccounts/', include('allauth.urls')),
-    path('ckeditor5/', include('django_ckeditor_5.urls')),
+    path('admin/', admin.site.urls),                        # Django admin panel
+    path('', include('webpages.urls')),                     # home, about, services, contact
+    path('youtubers/', include('youtubers.urls')),          # creator catalogue + AI match
+    path('hiretubers/', include('hiretubers.urls')),        # booking-request form handler
+    path('contactpage/', include('contactpage.urls')),      # public contact-form handler
+    path('contactinfo/', include('contactinfo.urls')),      # site contact-info form handler
+    path('accounts/', include('accounts.urls')),            # login / register / dashboard
+    path('socialaccounts/', include('allauth.urls')),       # allauth (Google/Facebook login)
+    path('ckeditor5/', include('django_ckeditor_5.urls')),  # rich-text editor endpoints
 ]
 
 if settings.DEBUG:

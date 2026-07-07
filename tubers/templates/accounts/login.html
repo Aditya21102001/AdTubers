@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
+{% comment %}
+Login page. Rendered by accounts.views.login; the form POSTs back to 'login'.
+Social login buttons (via allauth's socialaccount tags) only appear when a
+provider is configured, so the page works fine without OAuth set up.
+{% endcomment %}
 {% block content %}
 
 {% load socialaccount %}

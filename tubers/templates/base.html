@@ -1,4 +1,9 @@
 {% load static %}
+{% comment %}
+Master layout every page extends. Loads the CSS/JS (CDN + local static),
+pulls in the shared header, navbar and footer, and leaves a {% block content %}
+for each page to fill. All third-party assets are loaded from public CDNs.
+{% endcomment %}
 <!DOCTYPE html>
 <html lang="en">
 

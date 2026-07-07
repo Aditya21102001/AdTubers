@@ -1,3 +1,16 @@
+"""Views for the ``youtubers`` app — the creator catalogue.
+
+Contains the four public pages for creators:
+
+* :func:`youtubers` — the paginated, filterable browse grid.
+* :func:`youtubers_detail` — one creator's profile + hire form.
+* :func:`search` — the same list as a dedicated search results page.
+* :func:`recommend` — the AI creator-match page (see ``recommender.py``).
+
+The small underscore-prefixed helpers at the top are shared between the
+browse and search views so the filtering/pagination logic lives in one place.
+"""
+
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, render
 

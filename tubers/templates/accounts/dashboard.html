@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
+{% comment %}
+User dashboard (login required). Rendered by accounts.views.dashboard.
+Context: bookings (the current user's Hiretuber rows). Shows each booking's
+status badge and a link back to the creator; falls back to a prompt when empty.
+{% endcomment %}
 {% block content %}
 
 <main class="contact-us">

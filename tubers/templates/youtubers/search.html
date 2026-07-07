@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
+{% comment %}
+Search results page. Rendered by youtubers.views.search.
+Context: tubers (filtered, paginated Youtubers), city/camera_type/category
+(filter options), and page_obj + base_query (for the pagination include).
+{% endcomment %}
 
 
 {% block content %}

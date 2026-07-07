@@ -1,3 +1,7 @@
+{% comment %}
+Renders Django's flash messages as dismissible Bootstrap alerts.
+Included by pages that show feedback after a form submit (e.g. youtubers list).
+{% endcomment %}
 {% if messages %}
 
 {% for message in messages %}

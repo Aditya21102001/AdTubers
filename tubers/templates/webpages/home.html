@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
+{% comment %}
+Home / landing page. Rendered by webpages.views.home.
+Context: sliders (carousel banners), featured_youtubers, all_tubers, teams.
+{% endcomment %}
 
 {% block content %}
 
@@ -10,7 +14,7 @@
             <img src="{{ slide.photo.url }}" alt="" class="img-fluid w-100">
             <div class="top-container d-flex flex-column pl-5">
                 <h1>
-                    {{ slide.headline }}
+                    {{ slide.headerline }}
                 </h1>
                 <p>
                     {{ slide.subtitle }}

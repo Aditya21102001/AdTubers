@@ -1,4 +1,8 @@
 {% load static %}
+{% comment %}
+Main site navigation: Home, About, Tubers, AI Match, Services, Contact.
+Links are built with {% url %} so they stay correct if routes change.
+{% endcomment %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
         <a class="navbar-brand font-weight-bold" href="{% url 'home' %}">

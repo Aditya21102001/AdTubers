@@ -1,3 +1,10 @@
+"""Views for the ``accounts`` app — custom auth and the user dashboard.
+
+These are hand-rolled username/password views (not allauth's default pages).
+django-allauth is still wired up separately for optional Google/Facebook social
+login; see ``tubers/urls.py`` and ``settings.py``.
+"""
+
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 from django.contrib.auth.models import User
@@ -7,12 +14,13 @@ from contactinfo.models import Contactinfo
 from hiretubers.models import Hiretuber
 
 
-# Create your views here.
 def login(request):
-    if request.method =='POST':
-        username=request.POST['username']
-        password=request.POST['password']
-        user= auth.authenticate(username=username, password=password)
+    """Show the login form (GET) or authenticate the submitted credentials (POST)."""
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        # authenticate() returns the User on success, or None on bad credentials.
+        user = auth.authenticate(username=username, password=password)
         if user is not None:
             auth.login(request, user)
             messages.warning(request, 'You are logged in.')
@@ -24,16 +32,19 @@ def login(request):
 
     contactinfo = Contactinfo.objects.last()
     data = {
-        'contactinfo' : contactinfo
-    }    
+        'contactinfo': contactinfo
+    }
     return render(request, 'accounts/login.html', data)
 
 
 def logout_user(request):
+    """Log the current user out and return to the homepage."""
     logout(request)
     return redirect('home')
 
+
 def register(request):
+    """Show the sign-up form (GET) or create a new user account (POST)."""
     if request.method == 'POST':
         firstname = request.POST['firstname']
         lastname = request.POST['lastname']
@@ -41,15 +52,17 @@ def register(request):
         email = request.POST['email']
         password = request.POST['password']
         confirm_password = request.POST['confirm_password']
+        # Validate: passwords match, and username/email aren't already taken.
         if password == confirm_password:
-            if User.objects.filter(username = username).exists():
+            if User.objects.filter(username=username).exists():
                 messages.warning(request, 'Username already exists')
                 return redirect('register')
             else:
-                if User.objects.filter(email = email).exists():
+                if User.objects.filter(email=email).exists():
                     messages.warning(request, 'Email already exists')
                     return redirect('register')
                 else:
+                    # create_user() hashes the password before saving.
                     user = User.objects.create_user( first_name = firstname, last_name = lastname, username = username, email = email, password = password )
                     user.save()
                     messages.success(request, 'Account created Successfully')
@@ -60,12 +73,15 @@ def register(request):
             return redirect('register')
     contactinfo = Contactinfo.objects.last()
     data = {
-        'contactinfo' : contactinfo
+        'contactinfo': contactinfo
     }
     return render(request, 'accounts/register.html', data)
 
+
 @login_required(login_url='login')
 def dashboard(request):
+    """Logged-in user's dashboard: lists the booking requests they submitted."""
+    # Bookings are matched by user_id (a plain integer field, not a FK).
     bookings = Hiretuber.objects.filter(user_id=request.user.id).order_by('-created_date')
     contactinfo = Contactinfo.objects.last()
     data = {
